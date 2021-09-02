@@ -18,14 +18,14 @@ const displaySearchResult = books => {
         totalResult.innerText =`No result Found`
     }
     else{
-        totalResult.innerText =`Total Search Result ${books.numFound}`
+        totalResult.innerText =`Total Search Result 100 `
     }
     //console.log(docs);
    const searchResult = document.getElementById('search-result');
    const book = books.docs;
 
     searchResult.textContent ='';
-    book.forEach(doc => {
+    book.slice(0,800).map(doc => {
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
