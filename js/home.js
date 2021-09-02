@@ -25,7 +25,7 @@ const displaySearchResult = books => {
    const book = books.docs;
 
     searchResult.textContent ='';
-    book.slice(0,800).map(doc => {
+    book.slice(0,30).map(doc => {
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
