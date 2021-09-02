@@ -6,14 +6,26 @@ const searchBook = () => {
     //console.log(url)
      fetch(url)
         .then(res => res.json())
-        .then(data => displaySearchResult(data.docs));
+        .then(data => displaySearchResult(data));
         SearchField.value = "";
 }
-const displaySearchResult = docs => {
+const totalResult = document.getElementById('total-result');
+
+const displaySearchResult = books => {
+
+    const result = `${books.numFound}`
+    if(result==="0"){
+        totalResult.innerText =`No result Found`
+    }
+    else{
+        totalResult.innerText =`Total Search Result ${books.numFound}`
+    }
     //console.log(docs);
    const searchResult = document.getElementById('search-result');
-     searchResult.textContent ='';
-    docs.forEach(doc => {
+   const book = books.docs;
+
+    searchResult.textContent ='';
+    book.forEach(doc => {
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
@@ -22,10 +34,8 @@ const displaySearchResult = docs => {
         <div class="card-body">
           <h5 class="card-title">${doc.title}</h5>
           <p class="card-text">Author name: ${doc.author_name}</p>
+          <p class="card-text"> publish : ${doc.publisher}</p>
           <p class="card-text">First publish year: ${doc.first_publish_year}</p>
-
-
-          <p class="card-text"></p>
         </div>
       </div>
         `;
@@ -34,3 +44,4 @@ const displaySearchResult = docs => {
 
 
 }
+
