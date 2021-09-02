@@ -1,35 +1,41 @@
+/* input-search  */
 const searchBook = () => {
     const SearchField = document.getElementById("input-search");
     const searchText = SearchField.value;
-  
-    const url = `https://openlibrary.org/search.json?q=${searchText}`;
-
-     fetch(url)
+  const url = `https://openlibrary.org/search.json?q=${searchText}`;
+ fetch(url)
         .then(res => res.json())
         .then(data => displaySearchResult(data));
         SearchField.value = "";
 }
+/* Total result  */
 const totalResult = document.getElementById('total-result');
-
 const displaySearchResult = books => {
-
-    const result = `${books.numFound}`
+   const result = `${books.numFound}`
+    function colorName(){
+        totalResult.style.color='white'
+        totalResult.style.margin='20px 0px'
+    }
+    /*  error Heading */
     if(result==="0"){
         totalResult.innerText =`No result Found`
+        colorName()
     }
     else{
         totalResult.innerText =`Total Search Result 100 `
+        colorName()
     }
-    //console.log(docs);
    const searchResult = document.getElementById('search-result');
    const book = books.docs;
+
+   /* searchResult */
 
     searchResult.textContent ='';
     book.slice(0,30).map(doc => {
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
-        <div class="card h-100">
+        <div class="card h-100 rounded">
         <img src="https://covers.openlibrary.org/b/id/${doc.cover_i}-M.jpg" class="card-img-top w-75 mx-auto mt-2" alt="...">
         <div class="card-body">
           <h5 class="card-title">${doc.title}</h5>
