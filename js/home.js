@@ -1,9 +1,9 @@
 const searchBook = () => {
     const SearchField = document.getElementById("input-search");
     const searchText = SearchField.value;
-    //console.log(searchText);
+  
     const url = `https://openlibrary.org/search.json?q=${searchText}`;
-    //console.log(url)
+
      fetch(url)
         .then(res => res.json())
         .then(data => displaySearchResult(data));
